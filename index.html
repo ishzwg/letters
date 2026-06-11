@@ -128,13 +128,66 @@ button{
     z-index:3;
 }
 
-/* OPEN */
+/* 🎀 RIBBON */
+.ribbon{
+    position:absolute;
+    background:#ff4fa3;
+    z-index:4;
+    transition:1s ease;
+}
+
+/* horizontal */
+.ribbon.horizontal{
+    width:100%;
+    height:18px;
+    top:50%;
+    left:0;
+    transform:translateY(-50%);
+}
+
+/* vertical */
+.ribbon.vertical{
+    width:18px;
+    height:100%;
+    left:50%;
+    top:0;
+    transform:translateX(-50%);
+}
+
+/* bow */
+.bow{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    font-size:40px;
+    z-index:5;
+    transition:1s ease;
+}
+
+/* OPEN ANIMATION */
 .envelope.open .flap{
     transform: rotateX(180deg);
 }
 
 .envelope.open .letter{
     top:5%;
+}
+
+/* 🎀 UNTYING ANIMATION */
+.envelope.open .ribbon.horizontal{
+    transform: translateX(-120%);
+    opacity:0;
+}
+
+.envelope.open .ribbon.vertical{
+    transform: translateY(-120%);
+    opacity:0;
+}
+
+.envelope.open .bow{
+    transform:translate(-50%, -50%) scale(0);
+    opacity:0;
 }
 </style>
 </head>
@@ -162,6 +215,11 @@ button{
 <div id="envelopeContainer">
     <div class="envelope" onclick="openEnvelope()">
 
+        <!-- 🎀 RIBBON ADDED -->
+        <div class="ribbon horizontal"></div>
+        <div class="ribbon vertical"></div>
+        <div class="bow">🎀</div>
+
         <div class="flap"></div>
         <div class="body"></div>
         <div class="letter" id="letter"></div>
@@ -185,7 +243,7 @@ function showLetter(message){
     document.getElementById("letter").innerHTML = message;
 }
 
-/* 🌸 CREATE FLOATING PETALS */
+/* 🌸 PETALS */
 function createPetal(){
     const petal = document.createElement("div");
     petal.classList.add("petal");
