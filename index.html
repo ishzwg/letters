@@ -242,40 +242,6 @@ function togglePassword(){
     p.type = p.type === "password" ? "text" : "password";
 }
 
-/* 🌸 PETAL BURST */
-function burstPetals(){
-    const emojis = ["🌸","🌺","🌷","💮","💖"];
-
-    for(let i=0;i<25;i++){
-        const petal = document.createElement("div");
-        petal.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
-        petal.style.position = "absolute";
-        petal.style.left = "50%";
-        petal.style.top = "50%";
-        petal.style.fontSize = (16 + Math.random()*20) + "px";
-        petal.style.zIndex = 10;
-        petal.style.pointerEvents = "none";
-
-        document.body.appendChild(petal);
-
-        const angle = Math.random() * 2 * Math.PI;
-        const distance = 150 + Math.random()*200;
-
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
-
-        petal.animate([
-            { transform:`translate(0,0)`, opacity:1 },
-            { transform:`translate(${x}px, ${y}px)`, opacity:0 }
-        ], {
-            duration: 1200,
-            easing: "ease-out"
-        });
-
-        setTimeout(()=>petal.remove(), 1200);
-    }
-}
-
 /* 🎀 OPEN ENVELOPE */
 function openEnvelope(){
     const env = document.querySelector(".envelope");
