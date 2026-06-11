@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Letters</title>
+
 <style>
 body{
     margin:0;
@@ -15,105 +16,172 @@ body{
     font-family:Arial,sans-serif;
     background:#e6fdff;
 }
+
 h1{margin-bottom:20px;}
+
 input[type="text"],input[type="password"]{
-    width:280px;padding:12px;margin:8px 0;
-    border-radius:10px;border:1px solid #ccc;
+    width:280px;
+    padding:12px;
+    margin:8px 0;
+    border-radius:10px;
+    border:1px solid #ccc;
 }
+
 button{
-    padding:12px 25px;border:none;border-radius:10px;cursor:pointer;
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
 }
-#envelopeContainer{display:none;justify-content:center;align-items:center;margin-top:40px;}
-.envelope{position:relative;width:340px;height:240px;cursor:pointer;}
-.body{position:absolute;width:100%;height:100%;background:#d9a066;z-index:2;}
+
+#envelopeContainer{
+    display:none;
+    justify-content:center;
+    align-items:center;
+    margin-top:40px;
+}
+
+/* ENVELOPE */
+.envelope{
+    position:relative;
+    width:340px;
+    height:240px;
+    cursor:pointer;
+    overflow:hidden;        /* KEY FIX */
+    perspective:1000px;
+}
+
+/* BACK BODY */
+.body{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#d9a066;
+    z-index:1;
+}
+
+/* LETTER (starts hidden inside) */
+.letter{
+    position:absolute;
+    width:300px;
+    height:200px;
+    left:20px;
+    top:240px;              /* starts hidden */
+    background:white;
+    border-radius:8px;
+    padding:20px;
+    box-sizing:border-box;
+    overflow:auto;
+    text-align:left;
+    transition:1s ease;
+    z-index:2;
+}
+
+/* FLAP */
 .flap{
-    position:absolute;width:0;height:0;
+    position:absolute;
+    width:0;
+    height:0;
+    left:0;
+    top:0;
     border-left:170px solid transparent;
     border-right:170px solid transparent;
     border-top:120px solid #c98c4d;
-    transform-origin:top;transition:1s;z-index:3;
+    transform-origin:top;
+    transition:1s;
+    z-index:3;
 }
-.letter{
-    position:absolute;width:300px;height:200px;left:20px;top:20px;
-    background:white;border-radius:8px;padding:20px;box-sizing:border-box;
-    overflow:auto;text-align:left;transition:1s;z-index:1;
+
+/* OPEN STATE */
+.envelope.open .flap{
+    transform: rotateX(180deg);
 }
-.open .flap{transform:rotateX(180deg);}
-.open .letter {
-    transform: translateY(-220px);
+
+.envelope.open .letter{
+    top:20px; /* slides into view */
 }
 </style>
 </head>
+
 <body>
 
 <h1>Open Your Letter! 😁</h1>
 
 <div id="loginSection">
-<input type="text" id="name" placeholder="Enter your name">
-<br>
-<input type="password" id="password" placeholder="Enter password">
-<br>
-<label><input type="checkbox" onclick="togglePassword()"> Show Password</label>
-<br><br>
-<button onclick="checkAccess()">Open Letter</button>
+    <input type="text" id="name" placeholder="Enter your name">
+    <br>
+
+    <input type="password" id="password" placeholder="Enter password">
+    <br>
+
+    <label>
+        <input type="checkbox" onclick="togglePassword()"> Show Password
+    </label>
+
+    <br><br>
+
+    <button onclick="checkAccess()">Open Letter</button>
 </div>
 
 <div id="envelopeContainer">
-<div class="flap"></div>
-<div class="envelope" onclick="openEnvelope()">
-<div class="letter" id="letter"></div>
-<div class="body"></div>
-</div>
+    <div class="envelope" onclick="openEnvelope()">
+
+        <div class="flap"></div>
+        <div class="body"></div>
+        <div class="letter" id="letter"></div>
+
+    </div>
 </div>
 
 <script>
 function togglePassword(){
- const p=document.getElementById("password");
- p.type=p.type==="password"?"text":"password";
+    const p = document.getElementById("password");
+    p.type = p.type === "password" ? "text" : "password";
 }
 
 function openEnvelope(){
- document.querySelector(".envelope").classList.toggle("open");
+    document.querySelector(".envelope").classList.toggle("open");
 }
 
 function showLetter(message){
- document.getElementById("loginSection").style.display="none";
- document.getElementById("envelopeContainer").style.display="flex";
- document.getElementById("letter").innerHTML=message;
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("envelopeContainer").style.display = "flex";
+    document.getElementById("letter").innerHTML = message;
 }
 
 function checkAccess(){
- const name=document.getElementById("name").value.trim();
- const password=document.getElementById("password").value;
+    const name = document.getElementById("name").value.trim();
+    const password = document.getElementById("password").value;
 
- if(name==="Zyrah" && password==="Pugs123"){
-   showLetter("<h2>Dear Zy,</h2><p>Love you</p>");
- }
- else if(name==="Juan" && password==="GoUSTE"){
-   showLetter("<h2>Dear Juan,</h2><p>Love you</h2><p>Blablabla</h2><p>Blablabla</h2><p>BlaBlaBla</p>");
- }
- else if(name==="Michelle" && password==="Heeseung123"){
-   showLetter("<h2>Hi El,</h2><p>Love you</p>");
- }
- else if(name==="Zion" && password==="Zeeon123"){
-   showLetter("<h2>Dear Zion,</h2><p>Love you</p>");
- }
- else if(name==="Miley" && password==="FumiHuxley123"){
-   showLetter("<h2>Dear Baby,</h2><p>Love you</p>");
- }
- else if(name==="Sherbei" && password==="Beibei123"){
-   showLetter("<h2>Dear Sherbei,</h2><p>Love you</p>");
- }
- else if(name==="Loren" && password==="LorenIpsum123"){
-   showLetter("<h2>Dear Loren,</h2><p>Love you</p>");
- }
- else if(name==="Francine" && password==="Cine123"){
-   showLetter("<h2>Dear Francine,</h2><p>Love you</p>");
- }
- else{
-   alert("Wrong name or password.");
- }
+    if(name==="Zyrah" && password==="Pugs123"){
+        showLetter("<h2>Dear Zy,</h2><p>Love you</p>");
+    }
+    else if(name==="Juan" && password==="GoUSTE"){
+        showLetter("<h2>Dear Juan,</h2><p>Love you</p>");
+    }
+    else if(name==="Michelle" && password==="Heeseung123"){
+        showLetter("<h2>Hi El,</h2><p>Love you</p>");
+    }
+    else if(name==="Zion" && password==="Zeeon123"){
+        showLetter("<h2>Dear Zion,</h2><p>Love you</p>");
+    }
+    else if(name==="Miley" && password==="FumiHuxley123"){
+        showLetter("<h2>Dear Baby,</h2><p>Love you</p>");
+    }
+    else if(name==="Sherbei" && password==="Beibei123"){
+        showLetter("<h2>Dear Sherbei,</h2><p>Love you</p>");
+    }
+    else if(name==="Loren" && password==="LorenIpsum123"){
+        showLetter("<h2>Dear Loren,</h2><p>Love you</p>");
+    }
+    else if(name==="Francine" && password==="Cine123"){
+        showLetter("<h2>Dear Francine,</h2><p>Love you</p>");
+    }
+    else{
+        alert("Wrong name or password.");
+    }
 }
 </script>
+
 </body>
 </html>
