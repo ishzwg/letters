@@ -14,7 +14,7 @@ body{
     align-items:center;
     flex-direction:column;
     font-family:Arial,sans-serif;
-    background:#e6fcef;
+    background:#e6fdff;
 }
 
 h1{margin-bottom:20px;}
@@ -41,17 +41,19 @@ button{
     margin-top:40px;
 }
 
-/* ENVELOPE */
+/* 🔥 RESPONSIVE BIG ENVELOPE */
 .envelope{
     position:relative;
-    width:340px;
-    height:240px;
+    width:70vw;        /* bigger + responsive */
+    max-width:650px;
+    height:45vw;
+    max-height:420px;
     cursor:pointer;
-    overflow:hidden;        /* KEY FIX */
+    overflow:hidden;
     perspective:1000px;
 }
 
-/* BACK BODY */
+/* BODY */
 .body{
     position:absolute;
     width:100%;
@@ -60,15 +62,15 @@ button{
     z-index:1;
 }
 
-/* LETTER (starts hidden inside) */
+/* LETTER */
 .letter{
     position:absolute;
-    width:300px;
-    height:200px;
-    left:20px;
-    top:240px;              /* starts hidden */
+    width:90%;
+    height:85%;
+    left:5%;
+    top:100%;          /* hidden at start */
     background:white;
-    border-radius:8px;
+    border-radius:10px;
     padding:20px;
     box-sizing:border-box;
     overflow:auto;
@@ -84,21 +86,21 @@ button{
     height:0;
     left:0;
     top:0;
-    border-left:170px solid transparent;
-    border-right:170px solid transparent;
-    border-top:120px solid #c98c4d;
+    border-left:50% solid transparent;
+    border-right:50% solid transparent;
+    border-top:45% solid #c98c4d;
     transform-origin:top;
     transition:1s;
     z-index:3;
 }
 
-/* OPEN STATE */
+/* OPEN ANIMATION */
 .envelope.open .flap{
     transform: rotateX(180deg);
 }
 
 .envelope.open .letter{
-    top:20px; /* slides into view */
+    top:5%;   /* slides into view */
 }
 </style>
 </head>
@@ -157,7 +159,7 @@ function checkAccess(){
         showLetter("<h2>Dear Zy,</h2><p>Love you</p>");
     }
     else if(name==="Juan" && password==="GoUSTE"){
-        showLetter("<h2>Dear Juan,</h2><p>Love you</h2><p>Blablablablaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2><p>blablablabla</p>");
+        showLetter("<h2>Dear Juan,</h2><p>Love you</h2><p>dsjgsadfjkhgdfajkshjkdnbjkdbjdjklbsdakjlbsafkjlbgasflbjadfjlkbjsfaklbjksfdjbkfsjdklbljdfksybjklfsdbjklfsdbjklfsjklbjskfbjkdfbjklfsbjlkfsjbklfsjkbjfsk</h2><p>blablablablabla</p>");
     }
     else if(name==="Michelle" && password==="Heeseung123"){
         showLetter("<h2>Hi El,</h2><p>Love you</p>");
