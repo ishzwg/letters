@@ -43,16 +43,21 @@ function checkAccess() {
     const name = document.getElementById("name").value;
     const password = document.getElementById("password").value;
 
-    if(name === "Zyrah" && password === "Yellow"){
+    if(name === "Zyrah" && password === "Pugs123"){
         document.getElementById("letter").innerHTML =
         "Dear Zy,<br><br>You are an amazing person and I appreciate you.";
     }
 
-    else if(name === "John" && password === "basketball"){
+    else if(name === "Juan" && password === "GoUSTE"){
         document.getElementById("letter").innerHTML =
-        "Dear John,<br><br>Thank you for always being there.";
+        "Dear Juan,<br><br>Thank you for always being there.";
     }
 
+    else if(name === "Michelle" && password === "Heeseung123"){
+        document.getElementById("letter").innerHTML =
+        "Hi El,<br><br>Thank you for being such a great friend.";
+    }   
+        
     else{
         alert("Wrong name or password.");
     }
