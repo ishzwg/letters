@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Private Letters</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+        }
+
+        #letter {
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Open Your Letter</h1>
+
+<input type="text" id="name" placeholder="Enter your name">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="checkAccess()">Open Letter</button>
+
+<div id="letter"></div>
+
+<script>
+function checkAccess() {
+
+    const name = document.getElementById("name").value;
+    const password = document.getElementById("password").value;
+
+    if(name === "Rihann" && password === "sunflower"){
+        document.getElementById("letter").innerHTML =
+        "Dear Rihann,<br><br>You are an amazing person and I appreciate you.";
+    }
+
+    else if(name === "John" && password === "basketball"){
+        document.getElementById("letter").innerHTML =
+        "Dear John,<br><br>Thank you for always being there.";
+    }
+
+    else{
+        alert("Wrong name or password.");
+    }
+}
+</script>
+
+</body>
+</html>
