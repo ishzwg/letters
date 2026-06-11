@@ -14,10 +14,35 @@ body{
     align-items:center;
     flex-direction:column;
     font-family:Arial,sans-serif;
-    background:#fbe6fc;
+    background:#e6fce9;
+    overflow:hidden;
 }
 
-h1{margin-bottom:20px;}
+/* 🌸 FLOATING PETALS */
+.petal{
+    position:absolute;
+    top:-50px;
+    font-size:24px;
+    opacity:0.7;
+    animation: fall linear infinite;
+    z-index:0;
+    pointer-events:none;
+}
+
+@keyframes fall{
+    0%{
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity:0;
+    }
+    10%{ opacity:1; }
+    100%{
+        transform: translateY(110vh) translateX(80px) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* UI */
+h1{margin-bottom:20px; position:relative; z-index:2;}
 
 input[type="text"],input[type="password"]{
     width:280px;
@@ -25,6 +50,8 @@ input[type="text"],input[type="password"]{
     margin:8px 0;
     border-radius:10px;
     border:1px solid #ccc;
+    position:relative;
+    z-index:2;
 }
 
 button{
@@ -32,13 +59,18 @@ button{
     border:none;
     border-radius:10px;
     cursor:pointer;
+    position:relative;
+    z-index:2;
 }
 
+/* ENVELOPE */
 #envelopeContainer{
     display:none;
     justify-content:center;
     align-items:center;
     margin-top:40px;
+    position:relative;
+    z-index:2;
 }
 
 .envelope{
@@ -52,6 +84,7 @@ button{
     perspective:1000px;
 }
 
+/* BODY */
 .body{
     position:absolute;
     width:100%;
@@ -60,6 +93,7 @@ button{
     z-index:1;
 }
 
+/* LETTER */
 .letter{
     position:absolute;
     width:90%;
@@ -80,6 +114,7 @@ button{
     overflow-wrap:break-word;
 }
 
+/* FLAP */
 .flap{
     position:absolute;
     top:0;
@@ -93,6 +128,7 @@ button{
     z-index:3;
 }
 
+/* OPEN */
 .envelope.open .flap{
     transform: rotateX(180deg);
 }
@@ -149,33 +185,52 @@ function showLetter(message){
     document.getElementById("letter").innerHTML = message;
 }
 
+/* 🌸 CREATE FLOATING PETALS */
+function createPetal(){
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
+
+    const emojis = ["🌸","🌺","🌷","💮","💖"];
+    petal.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (5 + Math.random()*5) + "s";
+    petal.style.fontSize = (16 + Math.random()*20) + "px";
+
+    document.body.appendChild(petal);
+
+    setTimeout(()=> petal.remove(), 10000);
+}
+
+setInterval(createPetal, 400);
+
 function checkAccess(){
     const name = document.getElementById("name").value.trim();
     const password = document.getElementById("password").value;
 
     if(name==="Zyrah" && password==="Pugs123"){
-        showLetter("<h2>Dear Zy,</h2><p>Love you</p>");
+        showLetter("<h2>Dear Zy,</h2><p>Love you 💖</p>");
     }
     else if(name==="Juan" && password==="GoUSTE"){
-        showLetter("<h2>Dear Juan,</h2><p>Love you</p>");
+        showLetter("<h2>Dear Juan,</h2><p>Love you 💖</p>");
     }
     else if(name==="Michelle" && password==="Heeseung123"){
-        showLetter("<h2>Hi El,</h2><p>Love you</p>");
+        showLetter("<h2>Hi El,</h2><p>Love you 💖</p>");
     }
     else if(name==="Zion" && password==="Zeeon123"){
-        showLetter("<h2>Dear Zion,</h2><p>Love you</p>");
+        showLetter("<h2>Dear Zion,</h2><p>Love you 💖</p>");
     }
     else if(name==="Miley" && password==="FumiHuxley123"){
-        showLetter("<h2>Dear Baby,</h2><p>Love you</p>");
+        showLetter("<h2>Dear Baby,</h2><p>Love you 💖</p>");
     }
     else if(name==="Sherbei" && password==="Beibei123"){
-        showLetter("<h2>Dear Sherbei,</h2><p>Love you</p>");
+        showLetter("<h2>Dear Sherbei,</h2><p>Love you 💖</p>");
     }
     else if(name==="Loren" && password==="LorenIpsum123"){
-        showLetter("<h2>Dear Loren,</h2><p>Love you</p>");
+        showLetter("<h2>Dear Loren,</h2><p>Love you 💖</p>");
     }
     else if(name==="Francine" && password==="Cine123"){
-        showLetter("<h2>Dear Francine,</h2><p>Love you</p>");
+        showLetter("<h2>Dear Francine,</h2><p>Love you 💖</p>");
     }
     else{
         alert("Wrong name or password.");
