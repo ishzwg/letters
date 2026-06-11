@@ -14,82 +14,31 @@ body{
     align-items:center;
     flex-direction:column;
     font-family:Arial,sans-serif;
-    overflow:hidden;
-    background: radial-gradient(circle at top, #f6fff7, #dfffe6, #c9f7d4);
-    position:relative;
+    background:#e6fce7;
 }
 
-/* 🌫️ soft vignette + glow overlay */
-body::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.15));
-    pointer-events:none;
-}
+h1{margin-bottom:20px;}
 
-body::after{
-    content:"";
-    position:absolute;
-    inset:-20%;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), transparent 50%),
-                radial-gradient(circle at 70% 70%, rgba(255,182,255,0.25), transparent 60%);
-    filter: blur(40px);
-    opacity:0.7;
-    pointer-events:none;
-}
-
-/* TITLE */
-h1{
-    margin-bottom:20px;
-    position:relative;
-    z-index:2;
-    color:#2b2b2b;
-    text-shadow:0 2px 10px rgba(0,0,0,0.15);
-}
-
-/* INPUTS (glass blur effect) */
 input[type="text"],input[type="password"]{
     width:280px;
     padding:12px;
     margin:8px 0;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,0.4);
-    background: rgba(255,255,255,0.4);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    position:relative;
-    z-index:2;
-    outline:none;
+    border-radius:10px;
+    border:1px solid #ccc;
 }
 
-/* BUTTON */
 button{
     padding:12px 25px;
     border:none;
-    border-radius:12px;
+    border-radius:10px;
     cursor:pointer;
-    position:relative;
-    z-index:2;
-    background: linear-gradient(135deg, #ff7ac3, #ff4fa3);
-    color:white;
-    box-shadow:0 10px 25px rgba(255,79,163,0.3);
-    transition:0.3s ease;
 }
 
-button:hover{
-    transform: translateY(-2px);
-    box-shadow:0 15px 30px rgba(255,79,163,0.4);
-}
-
-/* ENVELOPE CONTAINER */
 #envelopeContainer{
     display:none;
     justify-content:center;
     align-items:center;
     margin-top:40px;
-    position:relative;
-    z-index:2;
 }
 
 /* ENVELOPE */
@@ -102,37 +51,36 @@ button:hover{
     cursor:pointer;
     overflow:hidden;
     perspective:1000px;
-
-    /* ✨ soft glow */
-    filter: drop-shadow(0 0 25px rgba(255, 120, 200, 0.25));
 }
 
-/* BODY */
+/* BACK BODY */
 .body{
     position:absolute;
     width:100%;
     height:100%;
-    background: linear-gradient(145deg, #e3b078, #d49a5a);
+    background:#d9a066;
     z-index:1;
 }
 
-/* LETTER (glass paper feel) */
+/* LETTER */
 .letter{
     position:absolute;
     width:90%;
     height:85%;
     left:5%;
     top:100%;
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(8px);
-    border-radius:12px;
+    background:white;
+    border-radius:10px;
     padding:20px;
     box-sizing:border-box;
     text-align:left;
     transition:1s ease;
     z-index:2;
-    overflow:auto;
-    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+
+    overflow-y:auto;
+    overflow-x:hidden;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
 }
 
 /* FLAP */
@@ -142,52 +90,14 @@ button:hover{
     left:0;
     width:100%;
     height:50%;
-    background: linear-gradient(145deg, #d39a5c, #c98c4d);
+    background:#c98c4d;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
     transform-origin: top;
     transition:1s ease;
     z-index:3;
-    box-shadow:0 10px 20px rgba(0,0,0,0.1);
 }
 
-/* RIBBONS */
-.ribbon{
-    position:absolute;
-    background:#ff4fa3;
-    z-index:4;
-    box-shadow:0 0 15px rgba(255,79,163,0.4);
-}
-
-.ribbon.horizontal{
-    width:100%;
-    height:18px;
-    top:50%;
-    left:0;
-    transform:translateY(-50%);
-}
-
-.ribbon.vertical{
-    width:18px;
-    height:100%;
-    left:50%;
-    top:0;
-    transform:translateX(-50%);
-}
-
-/* BOW */
-.bow{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    font-size:42px;
-    z-index:5;
-    transition:0.6s ease;
-    pointer-events:none;
-    filter: drop-shadow(0 0 10px rgba(255,79,163,0.4));
-}
-
-/* OPEN EFFECT */
+/* OPEN ANIMATION */
 .envelope.open .flap{
     transform: rotateX(180deg);
 }
@@ -195,33 +105,12 @@ button:hover{
 .envelope.open .letter{
     top:5%;
 }
-
-.envelope.open .bow{
-    transform:translate(-50%, -50%) scale(0);
-    opacity:0;
-}
-
-/* SNAP */
-.ribbon.snap.horizontal{ animation: snapH 0.6s forwards; }
-.ribbon.snap.vertical{ animation: snapV 0.6s forwards; }
-
-@keyframes snapH{
-    0%{ transform:translateY(-50%) scaleX(1); opacity:1; }
-    50%{ transform:translateY(-50%) scaleX(1.3) rotate(5deg); }
-    100%{ transform:translateY(-200%) scaleX(0); opacity:0; }
-}
-
-@keyframes snapV{
-    0%{ transform:translateX(-50%) scaleY(1); opacity:1; }
-    50%{ transform:translateX(-50%) scaleY(1.3) rotate(-5deg); }
-    100%{ transform:translateX(-50%) scaleY(0); opacity:0; }
-}
 </style>
 </head>
 
 <body>
 
-<h1>Open Your Letter! 💌</h1>
+<h1>Open Your Letter! 😁</h1>
 
 <div id="loginSection">
     <input type="text" id="name" placeholder="Enter your name">
@@ -242,11 +131,6 @@ button:hover{
 <div id="envelopeContainer">
     <div class="envelope" onclick="openEnvelope()">
 
-        <div class="bow">🎀</div>
-
-        <div class="ribbon horizontal"></div>
-        <div class="ribbon vertical"></div>
-
         <div class="flap"></div>
         <div class="body"></div>
         <div class="letter" id="letter"></div>
@@ -261,18 +145,7 @@ function togglePassword(){
 }
 
 function openEnvelope(){
-    const env = document.querySelector(".envelope");
-    const isOpen = env.classList.contains("open");
-
-    env.classList.toggle("open");
-
-    if(!isOpen){
-        setTimeout(()=>{
-            document.querySelector(".ribbon.horizontal").classList.add("snap");
-            document.querySelector(".ribbon.vertical").classList.add("snap");
-            burstPetals();
-        }, 300);
-    }
+    document.querySelector(".envelope").classList.toggle("open");
 }
 
 function showLetter(message){
@@ -286,37 +159,29 @@ function checkAccess(){
     const password = document.getElementById("password").value;
 
     if(name==="Zyrah" && password==="Pugs123"){
-        showLetter("<h2>Dear Zy,</h2><p>Love you 💖</p>");
+        showLetter("<h2>Dear Zy,</h2><p>Love you</p>");
     }
-
-    if(name==="Juan" && password==="GoUSTE"){
-        showLetter("<h2>Dear Juan,</h2><p>Love you 💖</p>");
+    else if(name==="Juan" && password==="GoUSTE"){
+        showLetter("<h2>Dear Juan,</h2><p>Love you</p>");
     }
-
-    if(name==="Michelle" && password==="Heeseung"){
-        showLetter("<h2>Dear El,</h2><p>Love you 💖</p>");
+    else if(name==="Michelle" && password==="Heeseung123"){
+        showLetter("<h2>Hi El,</h2><p>Love you</p>");
     }
-
-    if(name==="Zion" && password==="Zeeon123"){
-        showLetter("<h2>Dear Zion,</h2><p>Love you 💖</p>");
+    else if(name==="Zion" && password==="Zeeon123"){
+        showLetter("<h2>Dear Zion,</h2><p>Love you</p>");
     }
-
-    if(name==="Loren" && password==="Loren123"){
-        showLetter("<h2>Dear Loren,</h2><p>Love you 💖</p>");
+    else if(name==="Miley" && password==="FumiHuxley123"){
+        showLetter("<h2>Dear Baby,</h2><p>Love you</p>");
     }
-
-    if(name==="Sherbei" && password==="Bebei123"){
-        showLetter("<h2>Dear Bei,</h2><p>Love you 💖</p>");
+    else if(name==="Sherbei" && password==="Beibei123"){
+        showLetter("<h2>Dear Sherbei,</h2><p>Love you</p>");
     }
-
-    if(name==="Francine" && password==="Cine123"){
-        showLetter("<h2>Dear Cine,</h2><p>Love you 💖</p>");
+    else if(name==="Loren" && password==="LorenIpsum123"){
+        showLetter("<h2>Dear Loren,</h2><p>Love you</p>");
     }
-
-    if(name==="Miley" && password==="FumiHuxley123"){
-        showLetter("<h2>Dear Baby,</h2><p>Love you 💖</p>");
+    else if(name==="Francine" && password==="Cine123"){
+        showLetter("<h2>Dear Francine,</h2><p>Love you</p>");
     }
-        
     else{
         alert("Wrong name or password.");
     }
