@@ -31,11 +31,10 @@
 <h1>Open Your Letter :) </h1>
 
 <input type="text" id="name" placeholder="Enter your name here!">
-<input type="password" id="password" placeholder="Password...">
-<label>
-    <input type="checkbox" onclick="togglePassword()">
-    Show Password
-</label>
+<div class="password-container">
+    <input type="password" id="password" placeholder="Password...">
+    <button type="button" onclick="togglePassword()">👁️</button>
+</div>
 
 <button onclick="checkAccess()">Open Letter</button>
 
